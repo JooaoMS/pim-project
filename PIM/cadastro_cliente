@@ -1,0 +1,104 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <locale.h>
+#include <string.h>
+#define SIZE 200
+
+char nome [SIZE][50];
+char email[SIZE][50];
+int cpf[SIZE];
+int opcao;
+void cadastro();
+void pesquisa();
+void lista();
+
+int main (void){
+	do{
+		system("cls");
+		printf("\nSeja bem-vindo(a), Funcionario(a)\n\n[1] - Cadastrar cliente\n[2] - Listar todos\n[3] - Pesquisa clientes\n[4] - Sair do programa\n\nQual opcao voce deseja acessar?\n\n");
+		scanf("%d", &opcao);
+		switch(opcao){
+			case 1:
+				cadastro();
+				 break;
+			case 2:
+				lista();
+				break;
+			case 3:
+				pesquisa();
+				break;
+			case 4:
+				system("exit");
+				break;
+ default:
+				printf("Opcao invalida\n");
+				getchar();
+				getchar();
+				//test
+				break;
+		}
+	}while(opcao!=4);
+}
+void lista(){
+	int i;
+	for(i=0;i<SIZE;i++){
+		if(cpf[i]>0){
+			printf("\nINICIANDO LISTA!\n");
+			printf("\nNome: %s\nE-mail: %s\nCPF: %d\n", nome[i], email[i], cpf[i]);
+		}else{
+			break;
+		}
+	}
+	getchar();
+	getchar();
+}
+void cadastro(){
+	static int linha;
+	do{
+		printf("\nINICIANDO CADASTRO!\n");
+		printf("\nInsira o nome do cliente:\n ");
+		scanf("%s", &nome[linha]);
+		printf("\nInsira o email do cliente:\n ");
+		scanf("%s", &email[linha]);
+		printf("\nInsira o CPF do cliente:\n ");
+		scanf("%d", &cpf[linha]);
+		printf("\nDigite [1] para continuar ou outro valor para sair\n ");
+		scanf("%d", &opcao);
+		linha++;
+	}while(opcao==1);
+}
+void pesquisa(){
+	int cpfPesquisa;
+	char emailPesquisa[50];
+	int i=0;
+	do{
+		printf("\nINICIANDO PESQUISA!\n");
+		printf("\nDigite [1] para pesquisar por CPF\nDigite [2] Para pesquisar por email\n");
+		scanf("%d", &opcao);
+		switch(opcao){
+			case 1:
+				printf("\nDigite o CPF:\n ");
+				scanf("%d", &cpfPesquisa);
+				for(i=0;i<SIZE;i++){
+					if(cpf[i]==cpfPesquisa){
+						printf("\nNome: %s\nEmail: %s\nCPF: %d\n", nome[i], email[i], cpf[i]);
+					}
+				}
+				break;
+			case 2:
+				printf("\nDigite o E-mail:\n");
+				scanf("%s", &emailPesquisa);
+				for(i=0;i<SIZE;i++){
+					if(strcmp(email[i], emailPesquisa)==0){
+						printf("\nNome: %s\nEmail: %s\nCPF: %d\n", nome[i], email[i], cpf[i]);
+					}
+				}
+				break;
+			default:
+				printf("\n Opcao invalida!\n");
+				break;
+		}
+		printf("\nDigite 1 para continuar pesquisando\n ");
+		scanf("%d", &opcao);
+	}while(opcao==1);
+}
