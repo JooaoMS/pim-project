@@ -95,7 +95,7 @@ void pesquisa(){
 				}
 				break;
 			default:
-				printf("\n Opcao invalida!\n");
+				printf("\n Opcao invalida!!\n");
 				break;
 		}
 		printf("\nDigite 1 para continuar pesquisando\n ");
